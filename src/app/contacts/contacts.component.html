@@ -1,0 +1,4 @@
+<div class="card">
+  <app-contact-details [contact]="selectedContact"></app-contact-details>
+   <h2 *ngFor="let contact of contacts" class="contact-name" (click)="showDetails(contact)" >{{contact.name}}</h2>
+</div>
