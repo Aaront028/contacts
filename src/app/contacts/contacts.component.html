@@ -1,22 +1,32 @@
 <div class="card">
   <div *ngFor="let contact of contacts" class="contact-container" style="cursor: pointer;">
-    <h2  class="contact-name" (click)="toggleDetails(contact)"  [class.selected]="contact === selectedContact">{{contact.name}}</h2>
-    <app-contact-details *ngIf="contact === selectedContact" [contact]="selectedContact"></app-contact-details>
+    <h2  class="contact-name" (click)="toggleDetails(contact)"  [class.selected]="contact === selectedContact"><button (click)="deleteContact(contact)" *ngIf="isDeleting" class="btn delete-contact"><i class="fa-solid fa-trash"></i></button>{{contact.name}}</h2>
+    
+    <app-contact-details *ngIf="contact === selectedContact" [contact]="selectedContact" [isDeleting]="isDeleting"></app-contact-details>
   </div>
 
   <div class="card-details">
     <button class="btn add-new-contact" (click)="addNewContactBtn()">Add New Contact</button>
 
     <form *ngIf="addBtnClicked" (ngSubmit)="addContact()" >
-      <label for="newContactName">Name:</label>
-      <input type="text" id="newContactName" name="newContactName" [(ngModel)]="newContactName" >
-      <label for="newContactEmail">Email:</label>
-      <input type="text" id="newContactEmail" name="newContactEmail" [(ngModel)]="newContactEmail" >
-      <label for="newContactPhone">Phone:</label>
-      <input type="text" id="newContactPhone" name="newContactPhone" [(ngModel)]="newContactPhone" >
-      <button type="submit">Add Contact</button>
+      <div class="card-details-input">
+        <label for="newContactName">Name:</label>
+        <input  class="input" type="text" id="newContactName" name="newContactName" [(ngModel)]="newContactName" >
+      </div>
+      <div class="card-details-input">
+        <label for="newContactEmail">Email:</label>
+        <input class="input" type="text" id="newContactEmail" name="newContactEmail" [(ngModel)]="newContactEmail" >
+      </div>
+      <div class="card-details-input">
+        <label for="newContactPhone">Phone:</label>
+        <input  class="input"type="text" id="newContactPhone" name="newContactPhone" [(ngModel)]="newContactPhone" >
+      </div>
+      
+      <div>
+        <button class="btn" type="submit">Add Contact</button>
+        <button class="btn" (click)="ifDeleting()">Edit</button>
+      </div>
     </form>
-
   </div>
 </div>
     

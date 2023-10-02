@@ -7,7 +7,7 @@
       <span >
         {{contact.name}}
       </span>
-      <button *ngIf="!editing" (click)="startEditing()"><i class="fa-solid fa-pen-to-square"></i></button>
+      <button *ngIf="!editing && isDeleting" (click)="startEditing()"><i class="fa-solid fa-pen-to-square"></i></button>
       <input *ngIf="editing" [(ngModel)]="editedName" (blur)="stopEditing()" (keyup.enter)="stopEditing()">
     </h4>
 

@@ -11,6 +11,7 @@ export class ContactDetailsComponent {
   editedName: string = '';
   editedEmail: string = '';
   editedPhone: string = '';
+  @Input() isDeleting: boolean = false;
 
   ngOnChanges() {
     console.log('Input Contact:', this.contact);

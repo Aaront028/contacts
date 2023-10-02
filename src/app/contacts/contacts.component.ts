@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Contact } from './contact.model';
 
 @Component({
@@ -9,6 +9,7 @@ import { Contact } from './contact.model';
 export class ContactsComponent {
   selectedContact: Contact | null = null;
   addBtnClicked: boolean = false;
+  isDeleting: boolean = false;
 
   newContactName = '';
   newContactEmail = '';
@@ -37,7 +38,6 @@ export class ContactsComponent {
       const newContact = new Contact(this.newContactName, this.newContactEmail, this.newContactPhone);
       this.contacts.push(newContact);
 
-      // Clear the form fields after adding a new contact
       this.newContactName = '';
       this.newContactEmail = '';
       this.newContactPhone = '';
@@ -47,4 +47,22 @@ export class ContactsComponent {
   addNewContactBtn() {
     this.addBtnClicked = !this.addBtnClicked;
   }
+
+  ifDeleting() {
+    this.isDeleting = !this.isDeleting;
+  }
+
+  deleteContact(contact: Contact): void {
+    const index = this.contacts.indexOf(contact);
+
+    if (index !== -1) {
+      this.contacts.splice(index, 1);
+    }
+
+    if (this.selectedContact === contact) {
+      this.selectedContact = null;
+    }
+  }
+
+
 }
