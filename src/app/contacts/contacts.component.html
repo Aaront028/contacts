@@ -1,4 +1,7 @@
 <div class="card">
-  <app-contact-details [contact]="selectedContact"></app-contact-details>
-   <h2 *ngFor="let contact of contacts" class="contact-name" (click)="showDetails(contact)" >{{contact.name}}</h2>
+  <div *ngFor="let contact of contacts" class="contact-container" style="cursor: pointer;">
+    <h2  class="contact-name" (click)="toggleDetails(contact)"  [class.selected]="contact === selectedContact">{{contact.name}}</h2>
+    <app-contact-details *ngIf="contact === selectedContact" [contact]="selectedContact"></app-contact-details>
+  </div>
 </div>
+    

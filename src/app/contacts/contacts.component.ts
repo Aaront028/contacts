@@ -8,7 +8,7 @@ import { Contact } from './contact.model';
 })
 export class ContactsComponent {
   
-  selectedContact: any;
+  selectedContact: Contact | null = null;
 
   contacts: Contact[] = [
     new Contact('Alicia Vikander', 'aliciavikander@gmail.com', "02125356789"),
@@ -19,8 +19,15 @@ export class ContactsComponent {
 
   ]
 
-  showDetails(contact: Contact) {
+  toggleDetails(contact: Contact): void {
     console.log('Selected Contact:', contact);
-    this.selectedContact = contact;
+
+    if (this.selectedContact === contact) {
+      this.selectedContact = null;
+    } else {
+      this.selectedContact = contact;
+    }
+
+
   }
 }
