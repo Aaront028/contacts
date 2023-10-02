@@ -6,7 +6,7 @@
   </div>
 
   <div class="card-details">
-    <button class="btn add-new-contact" (click)="addNewContactBtn()">Add New Contact</button>
+    <button class="btn add-new-contact-btn" (click)="addNewContactBtn()">Add New Contact</button>
 
     <form *ngIf="addBtnClicked" (ngSubmit)="addContact()" >
       <div class="card-details-input">
@@ -23,8 +23,8 @@
       </div>
       
       <div>
-        <button class="btn" type="submit">Add Contact</button>
-        <button class="btn" (click)="ifDeleting()">Edit</button>
+        <button class="btn submit-btn" type="submit">Add Contact</button>
+        <button class="btn edit-btn" (click)="ifDeleting()">Edit</button>
       </div>
     </form>
   </div>
