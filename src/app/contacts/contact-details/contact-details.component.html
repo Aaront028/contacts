@@ -1,8 +1,22 @@
 <div class="card-details">
   <div *ngIf="contact" class="card-details-container">
     
-    <h4 class="card-details-title">Name: {{contact.name}}</h4>
-    <h5 class="card-details-title">Email: {{contact.email}}</h5>
-    <h5 class="card-details-title">Phone: {{contact.phone}}</h5>
+    <h4 class="card-details-title">
+      Name: 
+      
+      <span >
+        {{contact.name}}
+      </span>
+      <button *ngIf="!editing" (click)="startEditing()"><i class="fa-solid fa-pen-to-square"></i></button>
+      <input *ngIf="editing" [(ngModel)]="editedName" (blur)="stopEditing()" (keyup.enter)="stopEditing()">
+    </h4>
+
+    <h5 class="card-details-title">Email: {{contact.email}}
+      <input *ngIf="editing" [(ngModel)]="editedEmail" (blur)="stopEditing()" (keyup.enter)="stopEditing()">
+    </h5>
+    
+    <h5 class="card-details-title">Phone: {{contact.phone}}
+      <input *ngIf="editing" [(ngModel)]="editedPhone" (blur)="stopEditing()" (keyup.enter)="stopEditing()">
+    </h5>
   </div>
 </div>
