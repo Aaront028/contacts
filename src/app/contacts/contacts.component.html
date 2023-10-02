@@ -3,5 +3,20 @@
     <h2  class="contact-name" (click)="toggleDetails(contact)"  [class.selected]="contact === selectedContact">{{contact.name}}</h2>
     <app-contact-details *ngIf="contact === selectedContact" [contact]="selectedContact"></app-contact-details>
   </div>
+
+  <div class="card-details">
+    <button class="btn add-new-contact" (click)="addNewContactBtn()">Add New Contact</button>
+
+    <form *ngIf="addBtnClicked" (ngSubmit)="addContact()" >
+      <label for="newContactName">Name:</label>
+      <input type="text" id="newContactName" name="newContactName" [(ngModel)]="newContactName" >
+      <label for="newContactEmail">Email:</label>
+      <input type="text" id="newContactEmail" name="newContactEmail" [(ngModel)]="newContactEmail" >
+      <label for="newContactPhone">Phone:</label>
+      <input type="text" id="newContactPhone" name="newContactPhone" [(ngModel)]="newContactPhone" >
+      <button type="submit">Add Contact</button>
+    </form>
+
+  </div>
 </div>
     

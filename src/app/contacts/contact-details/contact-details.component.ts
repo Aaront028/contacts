@@ -31,4 +31,5 @@ export class ContactDetailsComponent {
     this.contact.phone = this.editedPhone;
 
   }
+  
 }
