@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Contact } from './contact.model';
-
+import { GraphqlService } from './graphql.service';
 @Component({
   selector: 'app-contacts',
   templateUrl: './contacts.component.html',
@@ -22,6 +22,29 @@ export class ContactsComponent {
     new Contact('Matt Damon', 'mattdamon@gmail.com', "042125054594"),
     new Contact('Scarlett Johansson', 'scarlettjohansson@gmail.com', "02123054599"),
   ]
+
+  responseData: any;
+
+  constructor(private graphqlService: GraphqlService) {}
+
+  ngOnInit(): void {}
+
+  getData(): void {
+    const query = `
+      query {
+        contacts {
+          id
+          name
+          email
+          phone
+        }
+      }
+    `;
+
+    this.graphqlService.query(query).subscribe((response) => {
+      this.responseData = response;
+    });
+  }
 
   toggleDetails(contact: Contact): void {
     console.log('Selected Contact:', contact);

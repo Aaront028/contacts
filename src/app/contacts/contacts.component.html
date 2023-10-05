@@ -27,6 +27,11 @@
         <button class="btn edit-btn" (click)="ifDeleting()">Edit</button>
       </div>
     </form>
+    <div>
+      <h1>GraphQL Example</h1>
+      <button (click)="getData()">Get GraphQL Data</button>
+      <pre>{{ responseData | json }}</pre>
+    </div>
   </div>
 </div>
     
