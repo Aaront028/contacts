@@ -18,12 +18,14 @@ export class ContactDetailsComponent {
   }
   @Input() contact: Contact = new Contact('', '', '');
 
-  startEditing() {
+
+  startEditing(): void {
     this.editing = true;
     this.editedName = this.contact.name;
     this.editedEmail = this.contact.email;
-    this.editedPhone = this.contact.phone;
+    this.editedPhone = this.contact.phone || ''; // Use an empty string if phone is undefined
   }
+
 
   stopEditing(){
     this.editing = false;

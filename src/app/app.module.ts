@@ -1,11 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { GraphQLModule } from './graphql.module'; // import the GraphQLModule
+
+import { GraphqlService } from '@app/services/graphql.service';
 
 import { AppComponent } from './app.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { ContactDetailsComponent } from './contacts/contact-details/contact-details.component';
 import { HeaderComponent } from './header/header.component';
-import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -16,9 +21,11 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+    GraphQLModule,
   ],
-  providers: [],
+  providers: [GraphqlService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

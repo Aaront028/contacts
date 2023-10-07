@@ -1,27 +1,32 @@
-<div class="card">
-  <div *ngFor="let contact of contacts" class="contact-container" style="cursor: pointer;">
-    <h2  class="contact-name" (click)="toggleDetails(contact)"  [class.selected]="contact === selectedContact"><button (click)="deleteContact(contact)" *ngIf="isDeleting" class="btn delete-contact"><i class="fa-solid fa-trash"></i></button>{{contact.name}}</h2>
-    
-    <app-contact-details *ngIf="contact === selectedContact" [contact]="selectedContact" [isDeleting]="isDeleting"></app-contact-details>
+<div class="card" *ngIf="data$ | async as data">
+  <div *ngFor="let contact of data.contacts" class="contact-container" style="cursor: pointer;">
+    <h2 class="contact-name" (click)="toggleDetails(contact)" [class.selected]="contact === selectedContact">
+      <button (click)="deleteContact(contact.id)" *ngIf="isDeleting" class="btn delete-contact">
+        <i class="fa-solid fa-trash"></i>
+      </button>
+      {{ contact.name }}
+    </h2>
+
+    <app-contact-details *ngIf="contact === selectedContact" [contact]="selectedContact!" [isDeleting]="isDeleting"></app-contact-details>
   </div>
 
   <div class="card-details">
     <button class="btn add-new-contact-btn" (click)="addNewContactBtn()">Add New Contact</button>
 
-    <form *ngIf="addBtnClicked" (ngSubmit)="addContact()" >
+    <form *ngIf="addBtnClicked" (ngSubmit)="addContact()">
       <div class="card-details-input">
         <label for="newContactName">Name:</label>
-        <input  class="input" type="text" id="newContactName" name="newContactName" [(ngModel)]="newContactName" >
+        <input class="input" type="text" id="newContactName" name="newContactName" [(ngModel)]="newContactName">
       </div>
       <div class="card-details-input">
         <label for="newContactEmail">Email:</label>
-        <input class="input" type="text" id="newContactEmail" name="newContactEmail" [(ngModel)]="newContactEmail" >
+        <input class="input" type="text" id="newContactEmail" name="newContactEmail" [(ngModel)]="newContactEmail">
       </div>
       <div class="card-details-input">
         <label for="newContactPhone">Phone:</label>
-        <input  class="input"type="text" id="newContactPhone" name="newContactPhone" [(ngModel)]="newContactPhone" >
+        <input class="input" type="text" id="newContactPhone" name="newContactPhone" [(ngModel)]="newContactPhone">
       </div>
-      
+
       <div>
         <button class="btn submit-btn" type="submit">Add Contact</button>
         <button class="btn edit-btn" (click)="ifDeleting()">Edit</button>
@@ -29,4 +34,3 @@
     </form>
   </div>
 </div>
-    
