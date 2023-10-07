@@ -3,9 +3,10 @@ import { HttpLink } from 'apollo-angular/http';
 import { NgModule } from '@angular/core';
 import { ApolloClientOptions, InMemoryCache } from '@apollo/client/core';
 import { HttpHeaders } from '@angular/common/http'; // Import HttpHeaders
+import { environment } from 'environment/environment';
 
-const uri = 'https://concise-crane-63.hasura.app/v1/graphql';
-const adminSecret = '9W@UgMPTYyIF4Sz1MixhiaR*CvGPboCH!8jMSSW0u1TquACPfWVKq35*muNbzb';
+const uri = environment.apiUrl;
+const adminSecret = environment.hasuraAdminSecret;
 
 export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
   // Create HttpHeaders
