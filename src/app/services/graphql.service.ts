@@ -19,6 +19,8 @@ interface Contact {
 export class GraphqlService {
   constructor(private apollo: Apollo) {}
 
+  
+
   // Example query
   getSomeData(): Observable<{ contacts: Contact[] }> {
     return this.apollo
@@ -35,12 +37,8 @@ export class GraphqlService {
       })
       .valueChanges.pipe(map((result) => result.data || { contacts: [] }));
   }
-  addContact(newContact: any): Observable<Contact | undefined> {
-    const variables: Record<string, any> = {
-      name: newContact.name,
-      email: newContact.email,
-      phone: newContact.phone,
-    };
+  addContact(name: string, email: string, phone: string): Observable<Contact | undefined> {
+    console.log('Adding contact:', { name, email, phone });
   
     return this.apollo
       .mutate<{ insert_contacts_one: Contact }>({
@@ -54,11 +52,36 @@ export class GraphqlService {
             }
           }
         `,
-        variables,
+        variables: {
+          name,
+          email,
+          phone,
+        },
       })
-      .pipe(map((result) => result.data?.insert_contacts_one));
-  }
+      .pipe(
+        map((result) => {
+          console.log('Add result:', result);
   
+          const addedContact = result.data?.insert_contacts_one;
+  
+          if (addedContact) {
+            console.log('Contact added successfully');
+  
+            // Trigger the subscription update
+            this.triggerContactSubscriptionUpdate();
+  
+            return addedContact;
+          } else {
+            console.error('Error adding contact');
+            return undefined;
+          }
+        }),
+        catchError((error) => {
+          console.error('Error in addContact:', error);
+          return of(undefined);
+        })
+      );
+  }
   
   
 
@@ -80,8 +103,12 @@ export class GraphqlService {
           email: updatedContact.email,
         },
       })
-      .pipe(map((result) => result.data?.updateContact));
+      .pipe(
+        switchMap(() => this.contactSubscription()),
+        map((contacts) => contacts && contacts[0])
+      );
   }
+  
   deleteContact(contactId: string): Observable<{ id: string } | undefined> {
     console.log('Deleting contact with id:', contactId);
   
@@ -107,6 +134,10 @@ export class GraphqlService {
   
           if (result.data?.delete_contacts?.affected_rows) {
             console.log('Contact deleted successfully');
+  
+            // Trigger the subscription update
+            this.triggerContactSubscriptionUpdate();
+  
             return { id: contactId };
           } else {
             console.error('Error deleting contact');
@@ -120,5 +151,30 @@ export class GraphqlService {
       );
   }
   
-  
+  // Add a method to trigger contact subscription update
+  private triggerContactSubscriptionUpdate(): void {
+    this.apollo.getClient().reFetchObservableQueries();
+  }
+  contactSubscription(): Observable<Contact[]> {
+    return this.apollo
+      .subscribe<{ contacts_stream: Contact[] }>({
+        query: gql`
+          subscription {
+            contacts_stream {
+              id
+              name
+              email
+              phone
+            }
+          }
+        `,
+      })
+      .pipe(
+        map((result) => result.data?.contacts_stream || []),
+        catchError((error) => {
+          console.error('Subscription error:', error);
+          return of([]);
+        })
+      );
+  }
 }
