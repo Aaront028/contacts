@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "nvm-exec 18 npm run ng-build",
+    "ng-build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
