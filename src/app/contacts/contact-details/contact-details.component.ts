@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter  } from '@angular/core';
 import { Contact } from '../contact.model';
 
 @Component({
@@ -18,6 +18,9 @@ export class ContactDetailsComponent {
   }
   @Input() contact: Contact = new Contact('', '', '');
 
+  
+  @Output() contactUpdated: EventEmitter<Contact> = new EventEmitter<Contact>();
+
 
   startEditing(): void {
     this.editing = true;
@@ -32,7 +35,8 @@ export class ContactDetailsComponent {
     this.contact.name = this.editedName;
     this.contact.email = this.editedEmail;
     this.contact.phone = this.editedPhone;
-
+    
+    this.contactUpdated.emit(this.contact);
   }
   
 }

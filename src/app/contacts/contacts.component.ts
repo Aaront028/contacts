@@ -72,6 +72,17 @@ export class ContactsComponent implements OnInit {
   }
   
 
+  // contacts.component.ts
+updateContact(updatedContact: Contact): void {
+  this.graphqlService.updateContact(updatedContact)
+    .subscribe({
+      next: (result) => console.log(result),
+      error: (error) => console.log(error)
+
+    });
+}
+
+
   addNewContactBtn() {
     this.addBtnClicked = !this.addBtnClicked;
   }

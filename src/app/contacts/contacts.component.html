@@ -7,7 +7,7 @@
       {{ contact.name }}
     </h2>
 
-    <app-contact-details *ngIf="contact === selectedContact" [contact]="selectedContact!" [isDeleting]="isDeleting"></app-contact-details>
+    <app-contact-details *ngIf="contact === selectedContact" [contact]="selectedContact!" [isDeleting]="isDeleting"  (contactUpdated)="updateContact($event)"></app-contact-details>
   </div>
 
   <div class="card-details">

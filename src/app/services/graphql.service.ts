@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { of,Observable } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { switchMap,catchError, map } from 'rxjs/operators';
 import gql from 'graphql-tag';
 
 
@@ -11,6 +11,7 @@ interface Contact {
   name: string;
   email: string;
   phone: string;
+  cursor: string; // Add this line if 'cursor' is a required field
 }
 
 @Injectable({
@@ -31,6 +32,7 @@ export class GraphqlService {
               id
               name
               email
+              phone
             }
           }
         `,
@@ -38,7 +40,7 @@ export class GraphqlService {
       .valueChanges.pipe(map((result) => result.data || { contacts: [] }));
   }
   addContact(name: string, email: string, phone: string): Observable<Contact | undefined> {
-    console.log('Adding contact:', { name, email, phone });
+    // console.log('Adding contact:', { name, email, phone });
   
     return this.apollo
       .mutate<{ insert_contacts_one: Contact }>({
@@ -60,7 +62,7 @@ export class GraphqlService {
       })
       .pipe(
         map((result) => {
-          console.log('Add result:', result);
+          // console.log('Add result:', result);
   
           const addedContact = result.data?.insert_contacts_one;
   
@@ -72,28 +74,34 @@ export class GraphqlService {
   
             return addedContact;
           } else {
-            console.error('Error adding contact');
+            // console.error('Error adding contact');
             return undefined;
           }
         }),
         catchError((error) => {
-          console.error('Error in addContact:', error);
+          // console.error('Error in addContact:', error);
           return of(undefined);
         })
       );
   }
   
   
-
   updateContact(updatedContact: any): Observable<Contact | undefined> {
+    console.log("Inside updatedContact", updatedContact);
     return this.apollo
       .mutate<{ updateContact: Contact }>({
         mutation: gql`
-          mutation UpdateContact($id: ID!, $name: name!, $email: String!) {
-            updateContact(id: $id, name: $name, email: $email) {
-              id
-              name
-              email
+          mutation UpdateTodo($id: Int!, $name: name!, $email: String! ) {
+            update_contacts(
+              where: { id: { _eq: $id } }
+              _set: { name: $name, email: $email }
+            ) {
+              affected_rows
+              returning {
+                id
+                name
+                email
+              }
             }
           }
         `,
@@ -104,13 +112,17 @@ export class GraphqlService {
         },
       })
       .pipe(
-        switchMap(() => this.contactSubscription()),
+        switchMap(() => {
+          // Trigger the subscription update
+          this.triggerContactSubscriptionUpdate();
+          return this.contactSubscription();
+        }),
         map((contacts) => contacts && contacts[0])
       );
   }
   
   deleteContact(contactId: string): Observable<{ id: string } | undefined> {
-    console.log('Deleting contact with id:', contactId);
+    // console.log('Deleting contact with id:', contactId);
   
     return this.apollo
       .mutate<{ delete_contacts: { affected_rows: number } }>({
@@ -156,18 +168,26 @@ export class GraphqlService {
     this.apollo.getClient().reFetchObservableQueries();
   }
   contactSubscription(): Observable<Contact[]> {
+    const initialCursor = {
+      id: 0, // Set an appropriate initial value based on your data
+    };
+  
     return this.apollo
       .subscribe<{ contacts_stream: Contact[] }>({
         query: gql`
-          subscription {
-            contacts_stream {
+          subscription($initialCursor: contacts_stream_cursor_value_input!) {
+            contacts_stream(batch_size: 10, cursor: { initial_value: $initialCursor, ordering: ASC }) {
               id
               name
               email
               phone
+              cursor: id
             }
           }
         `,
+        variables: {
+          initialCursor,
+        },
       })
       .pipe(
         map((result) => result.data?.contacts_stream || []),
@@ -176,5 +196,13 @@ export class GraphqlService {
           return of([]);
         })
       );
+  }
+  
+  
+  
+
+  // Method to trigger contact subscription update
+  triggerUpdate(): void {
+    this.triggerContactSubscriptionUpdate();
   }
 }
