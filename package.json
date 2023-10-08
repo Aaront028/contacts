@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "prebuild": "nvm install $NODE_VERSION && nvm use $NODE_VERSION",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
