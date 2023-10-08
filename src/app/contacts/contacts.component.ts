@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 export class ContactsComponent implements OnInit {
   selectedContact: Contact | null = null;
   addBtnClicked: boolean = false;
-  isDeleting: boolean = false;
+  isEditing: boolean = false;
 
   newContactName = '';
   newContactEmail = '';
@@ -70,6 +70,7 @@ export class ContactsComponent implements OnInit {
       },
     });
   }
+
   
 
   // contacts.component.ts
@@ -83,12 +84,14 @@ updateContact(updatedContact: Contact): void {
 }
 
 
+  
+
   addNewContactBtn() {
     this.addBtnClicked = !this.addBtnClicked;
   }
 
-  ifDeleting() {
-    this.isDeleting = !this.isDeleting;
+  ifEditing() {
+    this.isEditing = !this.isEditing;
   }
 
   deleteContact(contact: Contact): void {

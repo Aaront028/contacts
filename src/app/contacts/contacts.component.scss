@@ -39,3 +39,24 @@
 .input {
   width: 100%;;
 }
+
+
+@media only screen and (max-width: 600px) {
+  /* Styles for small screens go here */
+  .contact-name {
+    margin: 10px 0;  /* Reduce margin for better spacing on small screens */
+  }
+  
+  .btn {
+    padding: 8px;  /* Increase padding for better touch interaction on small screens */
+  }
+  
+  .card-details-input {
+    margin: 10px 0;  /* Adjust margin for better spacing on small screens */
+  }
+  
+  .input {
+    width: calc(100% - 10px);  /* Adjust width and consider box-sizing for padding */
+    padding: 5px;  /* Add padding for better input styling on small screens */
+  }
+}

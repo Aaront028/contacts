@@ -1,12 +1,15 @@
 .nav {
   display: flex;
   align-items: center;
+  justify-content: space-between;  /* Add this for better spacing of elements */
+  padding: 0 15px;  /* Add padding for better spacing on small screens */
   height: 50px;
   background-color: #FBF0B2;
-  color:black;
+  color: black;
 }
 
 .header {
   text-align: center;
   width: 100%;
+  padding: 20px 15px;  /* Add padding for better spacing on small screens */
 }

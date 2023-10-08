@@ -1,13 +1,13 @@
 <div class="card" *ngIf="data$ | async as data">
   <div *ngFor="let contact of data.contacts" class="contact-container" style="cursor: pointer;">
-    <h2 class="contact-name" (click)="toggleDetails(contact)" [class.selected]="contact === selectedContact">
-      <button (click)="deleteContact(contact.id)" *ngIf="isDeleting" class="btn delete-contact">
+    <h2 class="contact-name" (click)="toggleDetails(contact)" [class.selected]="contact === selectedContact && !isEditing">
+      <button (click)="deleteContact(contact.id)" *ngIf="isEditing" class="btn delete-contact">
         <i class="fa-solid fa-trash"></i>
       </button>
       {{ contact.name }}
     </h2>
 
-    <app-contact-details *ngIf="contact === selectedContact" [contact]="selectedContact!" [isDeleting]="isDeleting"  (contactUpdated)="updateContact($event)"></app-contact-details>
+    <app-contact-details *ngIf="contact === selectedContact" [contact]="selectedContact!" [isEditing]="isEditing"  (contactUpdated)="updateContact($event)"></app-contact-details>
   </div>
 
   <div class="card-details">
@@ -29,8 +29,9 @@
 
       <div>
         <button class="btn submit-btn" type="submit">Add Contact</button>
-        <button class="btn edit-btn" (click)="ifDeleting()">Edit</button>
       </div>
     </form>
+    <button class="btn edit-btn" (click)="ifEditing()">Edit</button>
+    
   </div>
 </div>

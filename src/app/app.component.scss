@@ -7,10 +7,17 @@
 
 .main-card {
   background-color: rgb(54, 54, 54);
-  border: 1px solid red;
-  width: 20%;
   border-radius: 25px;
   border: 3px solid #F8F9D7;
   padding: 25px;
-  margin-top: 25px; 
+  margin-top: 25px;
+  width: 80%; /* Adjust the width for better responsiveness */
+  max-width: 400px; /* Set a maximum width to prevent it from becoming too wide on larger screens */
+}
+
+@media (max-width: 600px) {
+  .main-card {
+    width: 90%; /* Adjust width for smaller screens */
+    padding: 15px; /* Adjust padding for smaller screens */
+  }
 }

@@ -11,7 +11,7 @@ export class ContactDetailsComponent {
   editedName: string = '';
   editedEmail: string = '';
   editedPhone: string = '';
-  @Input() isDeleting: boolean = false;
+  @Input() isEditing: boolean = false;
 
   ngOnChanges() {
     console.log('Input Contact:', this.contact);
@@ -35,7 +35,7 @@ export class ContactDetailsComponent {
     this.contact.name = this.editedName;
     this.contact.email = this.editedEmail;
     this.contact.phone = this.editedPhone;
-    
+
     this.contactUpdated.emit(this.contact);
   }
   
