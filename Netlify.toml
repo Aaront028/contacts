@@ -1,5 +1,6 @@
 [build]
-  command = "npm run build --verbose"
+  command = "npm install --force && npm run build"
+
 
 [context.production]
   command = "npm run build --prod"
