@@ -1,5 +1,5 @@
 [build]
-  command = "npm install --legacy-peer-deps --force && ng build"
+  command = "npm install --force && ng build"
   publish = "dist/contacts"
 
 [context.production]
