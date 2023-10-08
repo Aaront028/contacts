@@ -1,5 +1,6 @@
 [build]
   command = "nvm install && nvm use && npm install && nvm install 18 && nvm use 18 && npm run build"
+  publish = "dist/contacts"
 
 [context.production]
   command = "npm run build --prod"
