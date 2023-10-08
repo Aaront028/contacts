@@ -1,6 +1,5 @@
 [build]
-  command = "nvm install && nvm use && npm install --force nvm use 18 && npm run build"
-
+  command = "nvm install 14 && nvm use 14 && npm install && nvm install 18 && nvm use 18 && npm run build"
 
 [context.production]
   command = "npm run build --prod"
