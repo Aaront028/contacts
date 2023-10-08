@@ -1,6 +1,5 @@
 [build]
-  command = "npm install --force --legacy-peer-deps && npm run build"
-
+  command = "nvm install && nvm use && npm install && npm run build"
 
 [context.production]
   command = "npm run build --prod"
