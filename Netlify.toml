@@ -1,5 +1,5 @@
 [build]
-  command = "nvm install 16 && nvm use 16 && npm install && npm run build"
+  command = "nvm install && nvm use && npm install --legacy-peer-deps && npm run build"
 
 [context.production]
   command = "npm run build --prod"
