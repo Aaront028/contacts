@@ -1,7 +1,5 @@
 [build]
-  command = "npm install --force --legacy-peer-deps && ng build"
-  publish = "dist/contacts"
-  node_version = "14"
+  command = "npm run build --verbose"
 
 [context.production]
   command = "npm run build --prod"
