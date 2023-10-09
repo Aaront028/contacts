@@ -1,8 +1,0 @@
-[build]
-  command = "npm install && npm run build"
-  publish = "dist/contacts"
-  environment = { NODE_VERSION = "18" }
-  functions = "netlify/functions"
-
-[context.production]
-  command = "npm run build --prod"
