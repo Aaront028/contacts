@@ -1,4 +1,5 @@
 [build]
-  command = "npm install --force && npm run preinstall && npm run build"
+  command = "nvm install && nvm use && npm install && npm run build"
+
   publish = "dist/contacts"
   node_version = "18"
