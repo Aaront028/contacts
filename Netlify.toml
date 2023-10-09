@@ -1,4 +1,4 @@
 [build]
-  command = "ng build"
+  command = "ng build --verbose"
   node_version = "18"
   publish = "dist/contacts"
