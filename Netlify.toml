@@ -1,5 +1,5 @@
 [build]
-  command = "npm install --legacy-peer-deps"
+  command = "npm cache clean && npm install --legacy-peer-deps"
 
 [build.environment]
   NODE_VERSION = "18"
