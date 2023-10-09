@@ -1,4 +1,0 @@
-[build]
-  command = "ng build"
-  node_version = "18"
-  publish = "dist/contacts"
