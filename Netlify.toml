@@ -1,5 +1,6 @@
-[[build]]
-  command = "nvm install 18 && nvm use 18 && npm install && npm run build"
+[build]
+  command = "npm install && nvm exec 18 npm run build"
+
 
 [build.environment]
   NODE_VERSION = "18"
