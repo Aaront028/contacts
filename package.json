@@ -4,11 +4,12 @@
   "scripts": {
     "ng": "node_modules/.bin/ng",
     "start": "node_modules/.bin/ng serve",
-    "prebuild": "nvm install && node -v",
-    "build": "nvm exec 14 npm install && nvm exec 14 node_modules/.bin/ng build && nvm exec 18 npm install && nvm exec 18 node_modules/.bin/ng build",
+    "prebuild": "node -v",
+    "build": "npm install && node_modules/.bin/ng build",
     "watch": "node_modules/.bin/ng build --watch --configuration development",
     "test": "node_modules/.bin/ng test"
   },
+  
   
   "private": true,
   "dependencies": {
