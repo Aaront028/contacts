@@ -1,5 +1,5 @@
 [build]
-  command = "npm install && nvm exec 18 npm run build"
+  command = "nvm install && nvm use && npm install && npm run build"
 
 
 [build.environment]
