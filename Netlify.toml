@@ -1,5 +1,5 @@
 [build]
-  command = "npm cache clean && npm install --legacy-peer-deps"
+  command = "npm ci"
 
 [build.environment]
-  NODE_VERSION = "18"
+  NODE_VERSION = "16"
