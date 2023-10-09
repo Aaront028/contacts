@@ -1,14 +1,15 @@
 {
   "name": "contacts",
   "version": "0.0.0",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
-    "ng": "node_modules/.bin/ng",
     "start": "node_modules/.bin/ng serve",
-    "prebuild": "node -v",
     "build": "npm install && node_modules/.bin/ng build",
     "watch": "node_modules/.bin/ng build --watch --configuration development",
     "test": "node_modules/.bin/ng test"
-  },
+  }
   
   
   "private": true,
