@@ -1,3 +1,4 @@
-
-[build.environment]
-  NODE_VERSION = "18"
+[build]
+  command = "npm install --force && npm run build"
+  publish = "dist/contacts"
+  node_version = "18"
