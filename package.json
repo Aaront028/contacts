@@ -9,7 +9,7 @@
     "build": "npm install && node_modules/.bin/ng build",
     "watch": "node_modules/.bin/ng build --watch --configuration development",
     "test": "node_modules/.bin/ng test"
-  }
+  },
   
   
   "private": true,
