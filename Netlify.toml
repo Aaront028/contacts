@@ -1,5 +1,5 @@
 [build]
-  command = "nvm install && nvm use && npm install --force && nvm install 18 && nvm use 18 && npm run build"
+  command = "nvm install && nvm use && npm install --force && nvm install 18 && nvm use 18 && ng build"
   publish = "dist/contacts"
 
 [[plugins]]
