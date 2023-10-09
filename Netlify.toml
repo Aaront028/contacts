@@ -1,0 +1,10 @@
+[build]
+  command = "npm install && npm run build"
+  publish = "dist/contacts"
+  functions = "lambda"  # if you have Netlify functions
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[build.environment]
+  NODE_VERSION = "18"
