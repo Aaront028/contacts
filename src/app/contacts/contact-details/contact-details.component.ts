@@ -1,5 +1,10 @@
-import { Component, Input, Output, EventEmitter  } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
 import { Contact } from '../contact.model';
+import { AppState, AppStateModel } from '../../state/app.state';
+import { UpdateContact } from '../../state/app.actions';
+
 
 @Component({
   selector: 'app-contact-details',
@@ -16,13 +21,10 @@ export class ContactDetailsComponent {
   ngOnChanges() {
     console.log('Input Contact:', this.contact);
   }
+  constructor(private store: Store) {}
   @Input() contact: Contact = new Contact('', '', '');
-
-  
-  @Output() contactUpdated: EventEmitter<Contact> = new EventEmitter<Contact>();
-
-
-  startEditing(): void {
+  @Select(AppState) appState$: Observable<AppStateModel> | undefined;
+  startEditing() {
     this.editing = true;
     this.editedName = this.contact.name;
     this.editedEmail = this.contact.email;
@@ -35,8 +37,7 @@ export class ContactDetailsComponent {
     this.contact.name = this.editedName;
     this.contact.email = this.editedEmail;
     this.contact.phone = this.editedPhone;
-
-    this.contactUpdated.emit(this.contact);
+    this.store.dispatch(new UpdateContact(this.contact));
   }
   
 }
