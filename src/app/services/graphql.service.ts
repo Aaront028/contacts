@@ -3,6 +3,9 @@ import { Apollo } from 'apollo-angular';
 import { of,Observable } from 'rxjs';
 import { switchMap,catchError, map } from 'rxjs/operators';
 import gql from 'graphql-tag';
+import { Store } from '@ngxs/store';
+import { SetInitialContacts } from '../state/app.actions';
+import { tap } from 'rxjs/operators';
 
 
 // Define the Contact interface
@@ -18,7 +21,7 @@ interface Contact {
   providedIn: 'root',
 })
 export class GraphqlService {
-  constructor(private apollo: Apollo) {}
+  constructor(private apollo: Apollo, private store: Store) {}
 
   
 
@@ -37,7 +40,13 @@ export class GraphqlService {
           }
         `,
       })
-      .valueChanges.pipe(map((result) => result.data || { contacts: [] }));
+      .valueChanges.pipe(
+        map((result) => result.data || { contacts: [] }),
+        tap((data) => {
+          // Dispatch an action to set the initial state
+          this.store.dispatch(new SetInitialContacts(data.contacts)); 
+        })
+      );
   }
   addContact(name: string, email: string, phone: string): Observable<Contact | undefined> {
     // console.log('Adding contact:', { name, email, phone });
@@ -115,6 +124,7 @@ export class GraphqlService {
         switchMap(() => {
           // Trigger the subscription update
           this.triggerContactSubscriptionUpdate();
+         
           return this.contactSubscription();
         }),
         map((contacts) => contacts && contacts[0])
