@@ -27,7 +27,9 @@ import { HeaderComponent } from './header/header.component';
     GraphQLModule,
     NgxsModule.forRoot([AppState]),
   ],
-  providers: [GraphqlService],
+  providers: [
+    GraphqlService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -17,6 +17,7 @@ export class ContactDetailsComponent {
   editedEmail: string = '';
   editedPhone: string = '';
   @Input() isEditing: boolean = false;
+  
 
   ngOnChanges() {
 
@@ -39,15 +40,56 @@ export class ContactDetailsComponent {
   }
 
 
-  stopEditing(){
-    this.editing = false;
-    this.contact.name = this.editedName;
-    this.contact.email = this.editedEmail;
-    this.contact.phone = this.editedPhone;
-    if (this.contact.name !== this.editedName || this.contact.email !== this.editedEmail || this.contact.phone !== this.editedPhone) {
-      this.store.dispatch(new UpdateContact(this.contact));
-      this.contactUpdated.emit(this.contact);
+  stopEditing() {
+    console.log('stopEditing function called');
+    console.log('Original Contact:', this.contact);
+    
+    // Construct the updated contact object based on your logic
+    const updatedContact: Contact = {
+      id: this.contact.id,
+      name: this.editedName,
+      email: this.editedEmail,
+      phone: this.editedPhone,
+    };
+  
+    console.log('Edited Contact:', updatedContact);
+  
+    // Add a log for debugging
+    console.log('Before conditional check:', {
+      'contact.name': this.contact.name,
+      'editedName': this.editedName,
+      'contact.email': this.contact.email,
+      'editedEmail': this.editedEmail,
+      'contact.phone': this.contact.phone,
+      'editedPhone': this.editedPhone,
+    });
+  
+    if (
+      this.contact.name !== this.editedName ||
+      this.contact.email !== this.editedEmail ||
+      this.contact.phone !== this.editedPhone
+    ) {
+      console.log('Condition is true');
+      // Dispatch the UpdateContact action with the updatedContact
+      console.log('Before dispatch:', updatedContact);
+  
+      try {
+        this.store.dispatch(new UpdateContact(updatedContact));
+        console.log('Dispatch successful');
+      } catch (error) {
+        console.error('Dispatch error:', error);
+      }
+  
+      console.log('After dispatch');
+      // Emit the updated contact
+      this.contactUpdated.emit(updatedContact);
+    } else {
+      console.log('Condition is false');
     }
+  
+    console.log('After conditional check');
+    console.log('End of stopEditing function');
   }
+  
   
 }

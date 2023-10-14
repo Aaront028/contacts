@@ -1,5 +1,10 @@
 import { Contact } from '../contacts/contact.model';
 
+export class SetInitialContacts {
+  static readonly type = '[App] Set Initial Contacts';
+  constructor(public payload: Contact[]) {}
+}
+
 export class AddContact {
   static readonly type = '[App] Add Contact';
   constructor(public payload: Contact) {}
