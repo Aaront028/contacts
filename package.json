@@ -5,7 +5,6 @@
     "node": ">=18.17.0",
     "npm": ">=9.8.1"
   },
-  
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -15,7 +14,6 @@
   },
   "private": true,
   "dependencies": {
-<<<<<<< HEAD
     "@angular/animations": "^16.2.8",
     "@angular/common": "^16.2.8",
     "@angular/compiler": "^16.2.8",
@@ -24,6 +22,9 @@
     "@angular/platform-browser": "^16.2.8",
     "@angular/platform-browser-dynamic": "^16.2.8",
     "@angular/router": "^16.2.8",
+    "@ngxs/devtools-plugin": "^3.8.1",
+    "@ngxs/logger-plugin": "^3.8.1",
+    "@ngxs/store": "^3.8.1",
     "apollo-angular": "^5.0.2",
     "apollo-angular-link-http": "^1.11.0",
     "apollo-link-ws": "^1.0.20",
@@ -32,21 +33,6 @@
     "subscriptions-transport-ws": "^0.11.0",
     "tslib": "^2.6.2",
     "zone.js": "~0.14.0"
-=======
-    "@angular/animations": "^16.2.0",
-    "@angular/common": "^16.2.0",
-    "@angular/compiler": "^16.2.0",
-    "@angular/core": "^16.2.0",
-    "@angular/forms": "^16.2.0",
-    "@angular/platform-browser": "^16.2.0",
-    "@angular/platform-browser-dynamic": "^16.2.0",
-    "@angular/router": "^16.2.0",
-    "@ngxs/devtools-plugin": "^3.8.1",
-    "@ngxs/store": "^3.8.1",
-    "rxjs": "~7.8.0",
-    "tslib": "^2.3.0",
-    "zone.js": "~0.13.0"
->>>>>>> ngxs
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^16.2.5",

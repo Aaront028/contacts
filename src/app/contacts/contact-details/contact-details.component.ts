@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter  } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { Contact } from '../contact.model';
@@ -19,16 +19,23 @@ export class ContactDetailsComponent {
   @Input() isEditing: boolean = false;
 
   ngOnChanges() {
-    console.log('Input Contact:', this.contact);
+
+    if (this.contact) {
+      console.log('Input Contact:', this.contact);
+    }
   }
+
+  
   constructor(private store: Store) {}
   @Input() contact: Contact = new Contact('', '', '');
   @Select(AppState) appState$: Observable<AppStateModel> | undefined;
+  @Output() contactUpdated = new EventEmitter<Contact>();
+
   startEditing() {
     this.editing = true;
     this.editedName = this.contact.name;
     this.editedEmail = this.contact.email;
-    this.editedPhone = this.contact.phone || ''; // Use an empty string if phone is undefined
+    this.editedPhone = this.contact.phone || ''; 
   }
 
 
@@ -37,7 +44,10 @@ export class ContactDetailsComponent {
     this.contact.name = this.editedName;
     this.contact.email = this.editedEmail;
     this.contact.phone = this.editedPhone;
-    this.store.dispatch(new UpdateContact(this.contact));
+    if (this.contact.name !== this.editedName || this.contact.email !== this.editedEmail || this.contact.phone !== this.editedPhone) {
+      this.store.dispatch(new UpdateContact(this.contact));
+      this.contactUpdated.emit(this.contact);
+    }
   }
   
 }
