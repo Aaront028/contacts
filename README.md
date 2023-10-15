@@ -1,35 +1,29 @@
-Environment Variables Setup
-To manage environment variables in your Angular application, follow these steps:
 
-1. Create an Environments Folder
-Create a folder named environments under the src/app/ directory.
+## Environment variables setup
 
-2. Create environment.local.ts
-Inside the environments folder, create a file named environment.local.ts and define your environment variables:
+# Angular Environment Setup
 
+In Angular, switching branches can cause environment files to disappear, leading to setup hassles and potential accidental commits. To address this, a script has been crafted for your convenience. It automatically relocates your environment folders to match the active branch, ensuring safety from unintentional commits, thanks to entries in the gitignore file.
+
+# Set Up the Automatic Switching
+1. **Copy the Hook Script:** Copy the post-checkout hook script into your project. The script is located at .githooks/post-checkout in the root of your project.
 <pre>
-// src/app/environments/environment.local.ts
-
-export const environment = {
-  production: true,  // Set to 'false' for development
-  apiUrl: 'ENTER-YOUR-GRAPHQ-URLl',  // Your GraphQL API endpoint
-  hasuraAdminSecret: 'ENTER-YOUR-SECRET-CODE',  // Your Hasura Admin Secret
-};
+cp .githooks/post-checkout .git/hooks/post-checkout
 </pre>
-Update the values according to your project's requirements.
 
-3. Usage
-In your Angular components, services, or other parts of your application, you can import the environment variables:
-
+2. **Make the Script Executable:** Ensure that the script is executable by running the following command:
 <pre>
-// Import environment variables
-import { environment } from '../environments/environment.local';
-
-// Access variables
-console.log(environment.production); 
-console.log(environment.apiUrl);       
-console.log(environment.hasuraAdminSecret);  
+chmod +x .git/hooks/post-checkout
 </pre>
+
+3. **Set Up Environment Files:** Make sure you have environment files for each branch (e.g., environment.prod.ts, environment.staging.ts, environment.dev.ts). The hook script will automatically switch the environment.ts file when changing branches.
+
+# Usage
+- When you switch to the main branch, it will use environment.prod.ts.
+- When you switch to the staging branch, it will use environment.staging.ts.
+- For other branches, it will use environment.dev.ts.
+
+Now, whenever you switch branches, the environment file will be automatically updated.
 
 # Contacts
 
