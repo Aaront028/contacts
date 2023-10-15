@@ -1,3 +1,36 @@
+Environment Variables Setup
+To manage environment variables in your Angular application, follow these steps:
+
+1. Create an Environments Folder
+Create a folder named environments under the src/app/ directory.
+
+2. Create environment.local.ts
+Inside the environments folder, create a file named environment.local.ts and define your environment variables:
+
+<pre>
+// src/app/environments/environment.local.ts
+
+export const environment = {
+  production: true,  // Set to 'false' for development
+  apiUrl: 'ENTER-YOUR-GRAPHQ-URLl',  // Your GraphQL API endpoint
+  hasuraAdminSecret: 'ENTER-YOUR-SECRET-CODE',  // Your Hasura Admin Secret
+};
+</pre>
+Update the values according to your project's requirements.
+
+3. Usage
+In your Angular components, services, or other parts of your application, you can import the environment variables:
+
+<pre>
+// Import environment variables
+import { environment } from '../environments/environment.local';
+
+// Access variables
+console.log(environment.production); 
+console.log(environment.apiUrl);       
+console.log(environment.hasuraAdminSecret);  
+</pre>
+
 # Contacts
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.1.
@@ -26,4 +59,5 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 # contacts
-# contacts
+
+
