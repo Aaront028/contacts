@@ -1,11 +1,8 @@
-
-## Environment variables setup
-
-# Angular Environment Setup
+## Angular Environment Setup
 
 In Angular, switching branches can cause environment files to disappear, leading to setup hassles and potential accidental commits. To address this, a script has been crafted for your convenience. It automatically relocates your environment folders to match the active branch, ensuring safety from unintentional commits, thanks to entries in the gitignore file.
 
-# Set Up the Automatic Switching
+## Set Up the Automatic Switching
 1. **Copy the Hook Script:** Copy the post-checkout hook script into your project. The script is located at .githooks/post-checkout in the root of your project.
 <pre>
 cp .githooks/post-checkout .git/hooks/post-checkout
@@ -18,14 +15,14 @@ chmod +x .git/hooks/post-checkout
 
 3. **Set Up Environment Files:** Make sure you have environment files for each branch (e.g., environment.prod.ts, environment.staging.ts, environment.dev.ts). The hook script will automatically switch the environment.ts file when changing branches.
 
-# Usage
+## Usage
 - When you switch to the main branch, it will use environment.prod.ts.
 - When you switch to the staging branch, it will use environment.staging.ts.
 - For other branches, it will use environment.dev.ts.
 
 Now, whenever you switch branches, the environment file will be automatically updated.
 
-# Contacts
+## Contacts
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.1.
 
