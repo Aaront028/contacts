@@ -1,3 +1,5 @@
+## IMPORTANT PLEASE READ
+
 ## Angular Environment Setup
 
 In Angular, switching branches can cause environment files to disappear, leading to setup hassles and potential accidental commits. To address this, a script has been crafted for your convenience. It automatically relocates your environment folders to match the active branch, ensuring safety from unintentional commits, thanks to entries in the gitignore file.
