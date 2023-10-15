@@ -7,7 +7,7 @@ Create a folder named environments under the src/app/ directory.
 2. Create environment.local.ts
 Inside the environments folder, create a file named environment.local.ts and define your environment variables:
 
-<pre>
+<code>
 // src/app/environments/environment.local.ts
 
 export const environment = {
@@ -15,7 +15,7 @@ export const environment = {
   apiUrl: 'ENTER-YOUR-GRAPHQ-URLl',  // Your GraphQL API endpoint
   hasuraAdminSecret: 'ENTER-YOUR-SECRET-CODE',  // Your Hasura Admin Secret
 };
-</pre>
+</code>
 Update the values according to your project's requirements.
 
 3. Usage
